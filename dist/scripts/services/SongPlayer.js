@@ -45,6 +45,16 @@
       };
 
       /**
+      * @function stopSong
+      * @desc Stops currently playing song and sets 'playing' property on song object to null
+      * @param {Object} song
+      */
+      var stopSong = function(song) {
+          currentBuzzObject.stop();
+          song.playing = null;
+      };
+
+      /**
       * @desc Retrieves the index of the curently playing song
       * @type {Object} song
       */
@@ -57,6 +67,7 @@
       * @type {Object}
       */
       SongPlayer.currentSong = null;
+
       /**
       * @function play
       * @desc Plays a new song when clicked, or plays the current song which has been paused
@@ -94,6 +105,7 @@
       /**
       * @function previous
       * @desc Retreives the current playing song index and calculates the previous index
+      *Plays the previous song but if the current song is the first song,it will stop it.
       * @param {Object} song
       */
       SongPlayer.previous = function() {
@@ -101,8 +113,27 @@
           currentSongIndex--;
 
           if (currentSongIndex < 0) {
-              currentBuzzObject.stop();
-              SongPlayer.currentSong.playing = null;
+              stopSong(SongPlayer.currentSong);
+          } else {
+              var song = currentAlbum.songs[currentSongIndex];
+              setSong(song);
+              playSong(song);
+          }
+
+      };
+
+      /**
+      * @function next
+      * @desc Retreives the current playing song index and calculates the next index;
+      *Plays the next song but if the current song is the last song,it will stop it.
+      * @param {Object} song
+      */
+      SongPlayer.next = function() {
+          var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+          currentSongIndex++;
+
+          if (currentSongIndex === currentAlbum.songs.length) {
+              stopSong(SongPlayer.currentSong);
           } else {
               var song = currentAlbum.songs[currentSongIndex];
               setSong(song);

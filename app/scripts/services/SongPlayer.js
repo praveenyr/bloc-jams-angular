@@ -30,6 +30,7 @@
 
       SongPlayer.play = function(song) {
          //If the clicked song is not the currently playing song
+         if (currentSong !== song) {
             setSong(song);
             currentBuzzObject.play();
             song.playing = true;
@@ -46,6 +47,7 @@
           currentBuzzObject.pause();
           song.playing = false;
       };
+
      return SongPlayer;
    }
 

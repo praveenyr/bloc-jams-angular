@@ -41,10 +41,14 @@
       var playSong = function(song) {
           currentBuzzObject.play();
           song.playing = true;
-          console.log(currentSong);
-          console.log(song);
+
       };
 
+      /**
+      * @function play
+      * @desc Plays a new song when clicked, or plays the current song which has been paused
+      * @param {Object} song
+      */
       SongPlayer.play = function(song) {
          //If the clicked song is not the currently playing song
          if (currentSong !== song) {
@@ -59,12 +63,14 @@
 
       };
 
+      /**
+      * @function puase
+      * @desc Pauses the currently playing song when clicked
+      * @param {Object} song
+      */
       SongPlayer.pause = function(song) {
-        console.log("Inside Pause");
           currentBuzzObject.pause();
           song.playing = false;
-          console.log("currentBuzzObject is Paused ? : " + currentBuzzObject.isPaused());
-          console.log("song.playing :" + song.playing);
       };
 
      return SongPlayer;

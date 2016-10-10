@@ -56,7 +56,7 @@
             };
 
             /**
-            * @desc Calculate the seek Bar position when the users clicks mousedown and drags the thumbnail.
+            * @desc Calculate the seek Bar position when the users clicks mousedown and drags the thumbnail
             * @type {Object}event
             */
             scope.trackThumb = function() {

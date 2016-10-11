@@ -14,9 +14,9 @@
           return offsetXPercent;
       };
 
-//Retuning the object as part of the directory,which works like a factory.
+//Retuning the object from the directive,which works like a factory.
       return {
-        templateUrl: '/templates/seek_bar.html',
+        templateUrl: '/templates/directives/seek_bar.html',
         replace: true,
         restrict: 'E',
         scope: { },
@@ -47,6 +47,14 @@
             };
 
             /**
+            * @desc Return the width of the seek bar thumb by invoking fuction percentString()
+            * @type {Object}
+            */
+            scope.thumbStyle = function() {
+                return {left: percentString()};
+            };
+
+            /**
             * @desc Handle the seek Bar click event;calculate the percentage and the absolute value.
             * @type {Object}event
             */
@@ -56,7 +64,7 @@
             };
 
             /**
-            * @desc Calculate the seek Bar position when the users clicks mousedown and drags the thumbnail.
+            * @desc Calculate the seek Bar position when the users clicks mousedown and drags the thumbnail
             * @type {Object}event
             */
             scope.trackThumb = function() {

@@ -14,9 +14,9 @@
           return offsetXPercent;
       };
 
-//Retuning the object as part of the directory,which works like a factory.
+//Retuning the object from the directive,which works like a factory.
       return {
-        templateUrl: '/templates/seek_bar.html',
+        templateUrl: '/templates/directives/seek_bar.html',
         replace: true,
         restrict: 'E',
         scope: { },
@@ -44,6 +44,14 @@
             */
             scope.fillStyle = function() {
                 return {width: percentString()};
+            };
+
+            /**
+            * @desc Return the width of the seek bar thumb by invoking fuction percentString()
+            * @type {Object}
+            */
+            scope.thumbStyle = function() {
+                return {left: percentString()};
             };
 
             /**

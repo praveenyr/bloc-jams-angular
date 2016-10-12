@@ -19,13 +19,23 @@
         templateUrl: '/templates/directives/seek_bar.html',
         replace: true,
         restrict: 'E',
-        scope: { },
+        scope: {
+            onChange: '&'
+        },
         link: function(scope, element, attributes) {
             // directive logic to return
             scope.value = 0;
             scope.max = 100;
 
             var seekBar = $(element);
+
+            attributes.$observe('value', function(newValue) {
+                scope.value = newValue;
+            });
+
+            attributes.$observe('max', function(newValue) {
+                scope.max = newValue;
+            });
 
             /**
             * @desc Determine the % width of the seekBar
@@ -61,6 +71,7 @@
             scope.onClickSeekBar = function(event) {
                 var percent = calculatePercent(seekBar, event);
                 scope.value = percent * scope.max;
+                notifyOnChange(scope.value);
             };
 
             /**
@@ -72,6 +83,7 @@
                     var percent = calculatePercent(seekBar, event);
                     scope.$apply(function() {
                         scope.value = percent * scope.max;
+                        notifyOnChange(scope.value);
                     });
                 });
 
@@ -79,6 +91,17 @@
                     $document.unbind('mousemove.thumb');
                     $document.unbind('mouseup.thumb');
                 });
+            };
+
+            /**
+            * @desc insert the local newValue variable as the value argument we pass into the SongPlayer.setCurrentTime()
+            * function into the HTML on-change view
+            * @type {number}
+            */
+            var notifyOnChange = function(newValue) {
+                if (typeof scope.onChange === 'function') {
+                    scope.onChange({value: newValue});
+                }
             };
         }
 };

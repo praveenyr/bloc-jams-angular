@@ -91,6 +91,12 @@
        SongPlayer.volume = null;
 
        /**
+       * @desc Holds the boolean for the volume muted or not.
+       * @type {boolean}
+       */
+       SongPlayer.volumeMuted = false;
+
+       /**
        * @function setVolume
        * @desc Sets the current volume
        * @param {Number}
@@ -101,6 +107,23 @@
            }
        };
 
+       /**
+       * @function muteVolume
+       * @desc Mutes or umutes the volume on a button click in the view.
+       * @param {Object}
+       */
+       SongPlayer.muteVolume = function() {
+            if (currentBuzzObject) {
+                if (currentBuzzObject.isMuted()) {
+                     currentBuzzObject.unmute();
+                     SongPlayer.volumeMuted = false;
+                } else {
+                     currentBuzzObject.mute();
+                     SongPlayer.volumeMuted = true;
+                }
+            }
+        };
+        
       /**
       * @function setCurrentTime
       * @desc Set current time (in seconds) of currently playing song
